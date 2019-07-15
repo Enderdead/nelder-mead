@@ -14,7 +14,38 @@ template <int dim> using Tuple = std::tuple< Eigen::Matrix<double, dim, 1>, doub
 
 template <int dim> using Vector = Eigen::Matrix<double, dim, 1>;
 
+    '''
+        @param f (function): function to optimize, must return a scalar score
+            and operate over a numpy array of the same dimensions as x_start
+        @param x_start (numpy array): initial position
+        @param step (float): look-around radius in initial step
+        @no_improv_thr,  no_improv_break (float, int): break after no_improv_break iterations with
+            an improvement lower than no_improv_thr
+        @max_iter (int): always break after this number of iterations.
+            Set it to 0 to loop indefinitely.
+        @alpha, gamma, rho, sigma (floats): parameters of the algorithm
+            (see Wikipedia page for reference)
+        return: tuple (best parameter array, best score)
+    '''
 
+  /**
+ * Nelder Mean function.
+ *
+ * This function compute the nelder_meand on your func as loss function. 
+ *
+ * @param f  function to minimize, must return a double scalar.
+ * @param x_start  initial position.
+ * @param step  look-around radius in initial step.
+ * @param no_improv_thr  threshold on improve classification .
+ * @param no_improv_break  break after no_improv_break iterations without improvement.
+ * @param max_iter  break after exeed max_iter iterations.
+ * @param alpha  function to minimize, must return a double scalar.
+ * @param gamma  function to minimize, must return a double scalar.
+ * @param rho  function to minimize, must return a double scalar.
+ * @param sigma  function to minimize, must return a double scalar.
+
+ * @return best x find.
+ */
 template <int dim> Eigen::Matrix<double, dim, 1> Nelder_Mead_Optimizer(double (*func)(Eigen::Matrix<double, dim, 1>), Eigen::Matrix<double, dim, 1> x_start, double step=0.1,
                                                                        double no_improve_thr=10e-6, int no_improv_break=10, int max_iter=0, double alpha=1.0, double gamma=2.0,
                                                                        double rho=-0.5, double sigma=0.5, bool log=true) {

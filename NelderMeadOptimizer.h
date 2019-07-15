@@ -13,21 +13,6 @@
 template <int dim> using Tuple = std::tuple< Eigen::Matrix<double, dim, 1>, double>;
 
 template <int dim> using Vector = Eigen::Matrix<double, dim, 1>;
-
-    '''
-        @param f (function): function to optimize, must return a scalar score
-            and operate over a numpy array of the same dimensions as x_start
-        @param x_start (numpy array): initial position
-        @param step (float): look-around radius in initial step
-        @no_improv_thr,  no_improv_break (float, int): break after no_improv_break iterations with
-            an improvement lower than no_improv_thr
-        @max_iter (int): always break after this number of iterations.
-            Set it to 0 to loop indefinitely.
-        @alpha, gamma, rho, sigma (floats): parameters of the algorithm
-            (see Wikipedia page for reference)
-        return: tuple (best parameter array, best score)
-    '''
-
   /**
  * Nelder Mean function.
  *
